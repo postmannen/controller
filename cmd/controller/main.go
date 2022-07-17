@@ -5,11 +5,12 @@ import (
 	"log"
 	"sync"
 
+	"gioui.org/app"
 	"github.com/postmannen/controller"
 )
 
 func main() {
-	eventCh := make(chan controller.Event, 1)
+	eventCh := make(chan controller.Event)
 	c := controller.NewController(eventCh)
 	ctx := context.Background()
 
@@ -27,6 +28,8 @@ func main() {
 	// Test message.
 	e := controller.Event{EventType: controller.ETPrint}
 	c.AddEvent(e)
+
+	app.Main()
 
 	wg.Wait()
 }
